@@ -64,7 +64,7 @@ website:
       - section: Sensors
         contents:
         - href: wispr.qmd
-          text: WISPR acoustics
+          text: WISPR passive acoustics
 
 format:
   html:

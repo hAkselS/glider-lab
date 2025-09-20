@@ -1,79 +1,32 @@
 ---
-title: "WISPR Operation and Installation"
-subtitle: "Guidance for working with a WISPR acoustic system"
+title: "WISPR passive acoustic sensor"
+subtitle: "Guidance for installation and operation of a WISPR passive acoustic recorder"
 ---
 
-### Useful links
+WISPR stands for Wideband Intelligent Signal Processor and Recorder. It is commercially available from [Embedded Ocean Systems](https://embeddedocean.com/). 
+
+## Useful links
 
 - [WISPR3 GitHub repository](https://github.com/embeddedocean/wispr3)
-- [_**agate**_ Matlab tools](https://sfregosi.github.io/agate/)
+- [_**agate**_ MATLAB tools](https://sfregosi.github.io/agate/)
 - [IOP logdev manual](https://iop.apl.washington.edu/iopsg/logdev.txt)
 
 
-### WISPR operation
+## WISPR operation
 
 *These instructions are for the third generation WISPR3 recorder installed on a Seaglider*
 
-WISPR is configured/controlled in three places:
+### Before a mission
 
-1. As a logger device via Seaglider's internal memory (with a `wslog.cnf` file)
-2. Via the Seaglider piloting `cmdfile` with settings that can be changed during a mission
-3. WISPR3's own configuration file (`wispr.txt`) stored on the WISPR3 memory
+WISPR is installed on a Seaglider as a logger device. Configuration for the logger device (when the Seaglider should turn WISPR on and off, etc.) is set using a `wslog.cnf` file. This is typically set up once during installation and not changed. See detailed [installation instructions](#wispr-installation) below. 
 
-#### 1. Configure WISPR as logger on Seaglider and Seaglider internal memory
-
-A `wslog.cnf` logger configuration file manages how the Seaglider communicates with and controls WISPR as a 'logger' device. This file can contain a variety of commands outlined in detail in the [IOP logdev manual](https://iop.apl.washington.edu/iopsg/logdev.txt). This file is loaded durinng initial WISPR installation and otherwise should not need to be modified unless the WISPR hardware or software is changed. 
-
-The exact contents of this file (the amount of pauses and warmups) appears to be sensitive to changes in WISPR3 firmware so thorough testing is required after updating any firmware. Through testing, the below file should operate a *WISPR3 running firmware v1.2.20250829 without a real-time system*. 
-
-```text
-name=WISPR
-prefix=ws
-cmdprefix=$WS_
-baud=9600
-voltage=10
-current=.0592
-warmup=15000
-timeout=7000
-prompt=W>
-datatype=z
-start="%{$TME,%s*ff}%r%9%9%9%9$RUN*ee%r%9%9%9%9%9%9"
-stop="$EXI*a6%r%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9"
-```
-
-This file can be found in the `standard_files` folder as [`wslog_sg680_20250829_sim_dives.cnf`](https://github.com/noaa-pifsc/glider-lab/tree/main/standard_files). 
-
-
-#### 2. Control WISPR operation via `cmdfile` (during mission)
-
-Four parameters in the `cmdfile` control WISPR operation. These are typically set once at the start of a mission and should only be changed if the sampling scheme needs to be changed. 
-
-```text
-
-$WS_RECORDABOVE,-10.0   # depth at which WISPR will record, 0 will never record
-$WS_PROFILE,3.0         # which profiles to record (1-descent, 2-ascent, 3-both)
-$WS_XMITPROFILE,3.0     # which profiles to transmit (1-descent, 2-ascent, 3-both)
-$WS_UPLOADMAX,100.0     # max upload size (in ?? bytes)
-
-```
-
-In this example WISPR will turn on and record at all depths below 10 m, on both descents and ascents, will transmit data back for both profiles (only relevant with a real-time system), and transmitted files will not be bigger than 100 bytes.
-
-For `$WS_RECORDABOVE` a positive value indicates to sampling shallower than the specified depth (e.g., setting to 500 will record at depths from 0 to 500 m) and a negative value indicates to sample below the specified depth (e.g., setting to -20 will record at all depths below 20 m). 
-
-Pseudo-parameters that are reported in the `logfile`:
-```text
-$WS_STARTS,0.0          # pseudo-parameter, number of starts is reported in `logfile`
-$WS_NDIVE,1.0           # ?? psuedo-parameter
-```
-
-#### 3. Configure WISPR3 acoustic sampling settings
+Specific settings for the WISPR system itself (sampling rate, gain, etc) are set via a `wispr.txt` file stored on the WISPR memory cards. These must be set before a mission when the Seaglider is opened up and being refurbished and prepped for the mission. 
 
 The WISPR system's recording settings (sample rate, file duration, gain, etc.) are set using a `wispr.txt` configuration file that is loaded onto the WISPR3 memory (microSD) or set manually through direct serial communications with the WISPR3. If no `wispr.txt` is present, a default file will be created when WISPR3 powers on. Detailed descriptions of each input can be found in the [WISPR3 File Formats Manual](https://github.com/embeddedocean/wispr3/blob/main/Docs/wispr3_file_format.pdf).
 
-A file with the desired settings and the sensor and platform IDs should be loaded onto both microSD cards before a mission; a copy of what was loaded should be saved with the date. Below is an example file that will record 120 second files at a 200 kHz sampling rate and 24-bit resolution with no additional system gain. 
+A file with the desired settings and the sensor and platform IDs should be loaded onto both microSD cards before a mission; a copy of what was loaded should be saved with the date for reference. Below is an example file that will record 120 second files at a 200 kHz sampling rate and 24-bit resolution with no additional system gain. This example file and others are available in the `standard_files` folder [wispr.txt_v1.2.250828_200kHz_120sec](https://github.com/noaa-pifsc/glider-lab/blob/main/standard_files/wispr.txt_v1.2.250828_200kHz_120sec)
 
-```text
+```
 WISPR 3.0 configuration
 sensor_id: 2402
 platform_id: SG680
@@ -102,15 +55,100 @@ msg_termination: 13
 msg_handshake: 0
 ```
 
+### During a mission
+
+The Seaglider piloting `cmdfile` has four parameters that control WISPR operation while the glider is deployed. While these can be changed during a mission, these are typically set once at the start of a mission and should only be changed if the sampling scheme needs to be changed (*e.g.*, turning off WISPR to reduce battery consumption or only sampling on ascents but not descents). 
+
+```
+$WS_RECORDABOVE,-10.0   # depth at which WISPR will record, 0 will never record
+$WS_PROFILE,3.0         # which profiles to record (1-descent, 2-ascent, 3-both)
+$WS_XMITPROFILE,3.0     # which profiles to transmit (1-descent, 2-ascent, 3-both)
+$WS_UPLOADMAX,100.0     # max upload size (in ?? bytes)
+```
+
+In this example WISPR will turn on and record at all depths below 10 m, on both descents and ascents, will transmit data back for both profiles (only relevant with a real-time system), and transmitted files will not be bigger than 100 bytes.
+
+For `$WS_RECORDABOVE` a positive value indicates to sampling shallower than the specified depth (e.g., setting to 500 will record at depths from 0 to 500 m) and a negative value indicates to sample below the specified depth (e.g., setting to -20 will record at all depths below 20 m). 
+
+Pseudo-parameters that are reported in the `logfile`:
+
+```
+$WS_STARTS,0.0          # pseudo-parameter, number of starts is reported in `logfile`
+$WS_NDIVE,1.0           # ?? psuedo-parameter
+```
 
 
 ---
 
-### WISPR hardware installation
+## WISPR installation
 
-WISPR is installed via the Seaglider logdev interface meaning it is added as a "logger". 
+### Hardware installation
 
-[Load wslog.cnf](https://docs.google.com/document/d/1G_gupxgJEFnkTFvc0wSHgR8QZJDmqX2DFKEXKdLPN5Q/edit?tab=t.0#heading=h.v91o4q54occj)
+More here later on how to physically install a WISPR3 system on a Seaglider...
 
-More here later...
+This should include information on mounting, cabling, and hydrophone connections.
+
+### Seaglider logdev configuration
+
+WISPR is controlled by the Seaglider logdev interface meaning it must be added/loaded as a "logger" once it has been installed. A `wslog.cnf` logger configuration file manages how the Seaglider communicates with and controls WISPR as a 'logger' device. This file can contain a variety of commands outlined in detail in the [IOP logdev manual](https://iop.apl.washington.edu/iopsg/logdev.txt). This file is loaded durinng initial WISPR installation and otherwise should not need to be modified unless the WISPR hardware or software is changed.
+
+The exact contents of this file (the amount of pauses and warmups) appears to be sensitive to changes in WISPR3 firmware so thorough testing is required after updating any firmware. Through testing, the below file should operate a *WISPR3 running firmware v1.2.20250828 without a real-time system* (firmware copies can be found in this repo's [resources](https://github.com/noaa-pifsc/glider-lab/tree/main/resources/wispr/firmware) folder). 
+
+```
+name=WISPR
+prefix=ws
+cmdprefix=$WS_
+baud=9600
+voltage=10
+current=.0592
+warmup=15000
+timeout=7000
+prompt=W>
+datatype=z
+start="%{$TME,%s*ff}%r%9%9%9%9$RUN*ee%r%9%9%9%9%9%9"
+stop="$EXI*a6%r%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9%9"
+```
+
+An example `wslog.cnf` for WISPR3 firmware version 1.2.250828 is located in the `standard_files` folder: [`wslog.cnf_v1.2.250828_for_seaglider`](https://github.com/noaa-pifsc/glider-lab/tree/main/standard_files). 
+
+#### Load `wslog.cnf`
+
+Instructions to load a new `wslog.cnf` are available below or as a Google Doc here: [Load wslog.cnf](https://docs.google.com/document/d/1G_gupxgJEFnkTFvc0wSHgR8QZJDmqX2DFKEXKdLPN5Q/edit?tab=t.0#heading=h.v91o4q54occj).
+
+To update a `wslog.cnf` file on a Seaglider, the previously loaded configuration must be deleted from the logger and the file deleted from the Seaglider, then the new file must be transferred to the Seaglider memory and then loaded into the logger.
+
+On the Seaglider, the WISPR configuration file *must* be called `wslog.cnf` so in order to track different versions, always save a copy of the uploaded file with a unique name such as `wslog.cnf_sg680_20250829` so it can be referenced later if needed. The Seaglider manufacturer logger installation/logdev documentation can be found at [iop.apl.washington.edu/iopsg/logdev.txt](https://iop.apl.washington.edu/iopsg/logdev.txt).
+
+##### Steps:
+
+1.  Clear the currently loaded configuration
+    1.  Navigate through the main menu to `param > config > logdel`
+    2.  Choose `0` for WISPR (or whichever slot WISPR is loaded into)
+    3.  After hitting `[CR]` it will ask to confirm reinitializing the logger and select `Y` to do so
+
+2.  Delete old `wslog.cnf` using `pdos`
+    1.  Access `pdos` from the glider main menu
+    2.  Use `ls` to list all currently loaded files and check for presence of `wslog.cnf`
+    3.  Use `cat wslog.cnf` to view an existing configuration file
+    4.  Use `del wslog.cnf` to delete the existing file
+    5.  Use `ls` to confirm it has been removed
+
+3.  Upload the new `wslog.cnf` using `pdos`
+    1.  First use `ls` to confirm wslog.cnf isn’t there any more
+    2.  Prepare the Seaglider to receive the file via XMODEM by typing `xr wslog.cnf`
+    3.  The glider console will then be waiting for the file. Within TeraTerm navigate to `File > Transfer > XMODEM > Send` and select the desired file
+    4.  A window will pop up showing the transfer progress; it should only take a few seconds. If it is taking a long time, hit cancel and try again
+    5.  Verify the correct new file has been uploaded with `cat wslog.cnf`
+    6.  Type `strip1a wslog.cnf` to remove any extra lines or spaces
+
+4.  Add logger back in with `params > config > logadd`
+    1.  Choose slot `0` and then type in name of file `wslog.cnf`
+    2.  It will then prompt if you want to reinitalize hardware configuration and choose `Y`
+
+5.  Check things
+    1.  Via the Seaglider menu navigate to `hardware > config > logger`
+    2.  Select slot 1
+    3.  Confirm it says `WISPR USART2 pwr f6`
+    4.  Select `Y` when prompted to re-initialize
+
 

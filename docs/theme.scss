@@ -16,7 +16,7 @@ $high-desert:       #7A6855 !default;
 
 /*-- NOAA Fisheries brand colors --*/
 $midnight-sky:      #001743 !default;
-$twiglight-sky:     #002364 !default;
+$twilight-sky:      #002364 !default;
 
 $deep-sea-blue:     #00559B !default;
 $medium-sea-blue:   #056FB7 !default;
@@ -28,6 +28,7 @@ $whale-gray:        #323C46 !default;
 $dove-gray-1:       #A5AAAF !default;
 $dove-gray-2:       #CBCFD1 !default;
 $gray-tint-3:       #F1F2F3 !default;
+$gray-tint-1:       #F8F9FA !default;
 $gull-white:        #FFFFFF !default;
 
 $dark-teal:         #005E5E !default;
@@ -56,9 +57,171 @@ $doc-blue:          #00BDE3 !default;
 
 
 
+
+
+
 /*-- create border for images --*/
 .bordered-image {
   border: 3px solid black;
   padding: 5px;
   border-radius: 6px; /* Optional for rounded corners */
 }
+
+/*-- Custom code block style --*/
+/* Apply consistent background + font across all blocks */
+.sourceCode pre,
+pre:not([class]) {
+  background-color: $gray-tint-1 !important;
+  border-radius: 6px;
+  padding: 0.75em 1em;
+  overflow-x: auto;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9em;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Remove duplicate background on inner code */
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Navy base text for all code blocks */
+pre code,
+.sourceCode pre code,
+.sourceCode pre code span,
+pre:not([class]) code {
+  color: $midnight-sky !important;
+  font-weight: 500;
+}
+
+/*-- Custom inline code style --*/
+:not(pre) > code{
+  background-color: $gray-tint-1 !important; 
+  color: $midnight-sky;
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+  font-size: 0.95em;
+  font-weight: 500;
+}
+
+/*-- Copy button styling --*/
+.code-copy-button {
+  background-color: $gray-tint-1;   /* match code background */
+  border: 1px solid $midnight-sky;
+  border-radius: 4px;
+  padding: 0.2em 0.5em;
+  font-size: 0.8em;
+  color: $midnight-sky;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/*-- Hover state --*/
+.code-copy-button:hover {
+  background-color: $waves;
+  color: $gull-white; /* white text when hovered */
+}
+
+/* ------------------------------------------------------------------
+   Headings Styling
+   ------------------------------------------------------------------*/
+
+/* Base styles for all headings */
+h1, h2, h3, h4, h5, h6 {
+  color: $midnight-sky !important;                    /* navy text */
+  font-weight: 700;                                   /* bold */
+  line-height: 1.2;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+/* Specific sizing for each level */
+h1 { font-size: 2.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; }
+h2 { font-size: 2rem; margin-top: 2rem; margin-bottom: 1.2rem; }
+h3 { font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 0.9rem; color: $whale-gray !important;}
+h4 { font-size: 1.25rem; margin-top: 1.2rem; margin-bottom: 0.75rem; }
+h5 { font-size: 1rem; margin-top: 1rem; margin-bottom: 0.5rem; 
+      color: $fisheries-teal !important; opacity: 1 !important; font-weight: 500;}
+h6 { font-size: 0.9rem; margin-top: 0.8rem; margin-bottom: 0.4rem; }
+
+/* Accent underling and background */
+h1 {
+  border-bottom: 2px solid $waves;
+  padding-bottom: 0.3rem;
+  
+  /* lifted/colored background */
+  /*----
+  background-color: rgba(50, 60, 70, 0.1); /* $whale-gray at 10% opacity */
+  /*padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* subtle lift */
+  /*transition: all 0.2s ease;
+  ----*/
+}
+
+/* Optional uppercase for secondary headings */
+h2, h4 {
+  text-transform: uppercase;
+}
+
+/* Add subtle hover effect for H2 to draw attention */
+h2:hover {
+  color: $waves !important;
+  transition: color 0.2s ease;
+}
+
+/* Add light underline for H4 to draw attention */
+h4 {
+  border-bottom: 1px solid $dove-gray-2;
+}
+
+/* ------------------------------------------------------------------
+   Hyperlink Styling
+   ------------------------------------------------------------------*/
+
+/* Default link color */
+#quarto-document-content a {      /* or Quarto content class */
+  color: $deep-sea-blue !important;
+  text-decoration: none; /* remove underline if you like */
+  transition: color 0.2s ease;
+}
+
+/* Hover / focus state */
+#quarto-document-content a:hover,
+#quarto-document-content a:focus {
+  color: $vivid-crustacean !important; /* accent on hover */
+  text-decoration: underline; /* optional for hover */
+}
+
+/* Visited links */
+#quarto-document-content a:visited {
+  color: $dark-urchin !important;
+}
+
+/* Optional: active link */
+#quarto-document-content a:active {
+  color: $urchin !important;
+}
+
+
+/* ------------------------------------------------------------------
+   Sidebar link hover with background
+   ------------------------------------------------------------------*/
+.sidebar-navigation a {
+  transition: all 0.2s ease; /* smooth hover transition */
+}
+
+.sidebar-navigation a:hover,
+.sidebar-navigation a:focus {
+  color: $gull-white !important;      /* bright accent text */
+  background-color: rgba($whale-gray, 0.1); /* 10% opacity */
+  text-decoration: none;
+  border-radius: 4px;                       /* subtle rounding */
+  padding-left: 0.5em;                      /* optional padding for hover */
+  padding-right: 0.5em;
+}
+

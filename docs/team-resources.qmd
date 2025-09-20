@@ -10,9 +10,9 @@ Subtitle: Links to various resources that don't belong elsewhere
 
 {{< placeholder >}}
 
-#### Mapping resources
+### Mapping resources
 
-Various kmls and shapefiles relevant to the Pacific Islands Region are included in this repository or in the [shapefile_links.md](github.com/noaa-pifsc/glider-lab/tree/main/resources/mapping_resources/shapefile_links.md)
+Various kmls and shapefiles relevant to the Pacific Islands Region are included in this repository or in the [shapefile_links.md](https://github.com/noaa-pifsc/glider-lab/blob/main/resources/mapping_resources/shapefile_links.md)
 
 ### WISPR PAM system resources
 
@@ -21,3 +21,63 @@ See the WISPR3 GitHub repo for the most up-to-date firmware, documentation, and 
 
 Specifically, this includes updated firmware files (and instructions to flash updated firmware) in the '[Release](https://github.com/embeddedocean/wispr3/tree/main/Release)' folder and manuals for the WISPR3 file format, serial command interface, and connector specs in the '[Docs](https://github.com/embeddedocean/wispr3/tree/main/Docs)' folder. 
 
+For more information on installing, configuring, and controlling WISPR on a Seaglider, see our [WISPR page](wispr.qmd). 
+
+### Random things...
+
+This is a temporary placeholder for random bits of useful Seaglider info that we haven't fully organized yet. 
+
+#### Test phone connection on Seaglider
+
+- From the main menu `hardware > modem > remote`
+- This will try to make a phone call only (without GPS or uploading anything)
+
+#### Set up a new mission on seaglider.pub
+
+This is done before a new actual mission or before any refurbishment or extensive testing and repairs in the lab. 
+
+##### Create the new mission directory
+
+- Navigate to the glider’s home directory e.g., `/home/jails/noaaosu/gliderjail/home/sgXXX`
+- Use `NewMission.py` to create a new folder for this specific mission
+  - The function will set up the mapping of the `current` folder so all newly created piloting files will be saved here when the glider calls in
+  - It will also copy general files from the home directory like `pagers.yml`, all the files that start with `.` that we don’t really use except .pagers, and piloting files like `science`, c`mdfile`, `targets` and `sg_calib_constants.m`. The originals stay in the home directory but this provides a starting point for this particular mission
+- To run the function use:
+
+```default
+basepy NewMission.py ./ <newMissionFolderName>
+
+# note the above uses seaglider.pub's shortcut to map full python paths
+# alternatively could use full paths
+/opt/basestation/bin/python /usr/local/basestation3/NewMission.py ./ <newMissionFolderName>
+```
+
+- `<newMissionFolderName>` is the folder name should follow the format of the mission title string used in `sg_calib_constants.m` that includes the date (formatted `YYYYMMDD` and location or project (e.g., `20250918_tests`)
+- Check that it was set up properly by running `ls -la` from the home directory and checking where the `current` folder points. 
+
+##### Add the mission to `missions.yml`
+
+Update the `missions.yml` to properly display this mission on the `seaglider.pub` vis
+
+The syntax is very specific and errors can be difficult to debug so it is best practice to create a backup copy before making any changes.
+
+- Navigate to your user folder (`/home/jails/noaaosu/username`) and use `cp ../gliderjail/home/missions.yml missions.orig` to create a backup of the existing `missions.yml` in your user directory
+- Navigate to `/home/jails/noaaosu/gliderjail/home`
+- Open `missions.yml` for editing (using `vi` or `nano`)
+- Copy the previous mission to the `# past missions` section if needed
+- Mark the previous mission as complete by adding the line `status: complete`
+- Update the mission name and folder path in the `# current missions section`
+
+Example syntax:
+
+```default
+# long form
+  - 
+    glider: 680
+    mission: CalCurCEAS_Sep2024
+    path: sg680/2024-09-14_CalCurCEAS_Sep2024
+    also: [ {asset: newport} ]
+    
+# condensed
+  - { glider: 680, mission: CalCurCEAS_Sep2024, path: sg680/2024-09-14_CalCurCEAS_Sep2024, status: complete}
+```
