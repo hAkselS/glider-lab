@@ -2,6 +2,15 @@
 title: "Data management"
 ---
 
+##### Quick links (NOAA-only)
+
+[NMFS PIC Glider Google Shared Drive](https://drive.google.com/drive/u/0/folders/0ADBCQZl7LcMGUk9PVA)  
+[pifsc-1 GCP](https://console.cloud.google.com/storage/browser/pifsc-1;tab=objects?forceOnBucketsSortingFiltering=true&invt=Abtsgw&project=ggn-nmfs-pamdata-prod-1&prefix=&forceOnObjectsSortingFiltering=false)
+
+---
+
+### Data management plan
+
 Draft [Data Management Plan](https://docs.google.com/document/d/1FCwBSUFHXaw8124u0K0YmNmUrCakKbkyKyzvz7sumNM/edit?tab=t.0#heading=h.bphdsu7lbiaf)
 
 {{< placeholder >}}
