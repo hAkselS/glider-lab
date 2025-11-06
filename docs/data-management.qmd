@@ -2,25 +2,27 @@
 title: "Data management"
 ---
 
-##### Quick links (NOAA-only)
+#### Quick links (NOAA only)
 
 [NMFS PIC Glider Google Shared Drive](https://drive.google.com/drive/u/0/folders/0ADBCQZl7LcMGUk9PVA)  
-[pifsc-1 GCP](https://console.cloud.google.com/storage/browser/pifsc-1;tab=objects?forceOnBucketsSortingFiltering=true&invt=Abtsgw&project=ggn-nmfs-pamdata-prod-1&prefix=&forceOnObjectsSortingFiltering=false)
+[pifsc-1 GCP Bucket](https://console.cloud.google.com/storage/browser/pifsc-1;tab=objects?forceOnBucketsSortingFiltering=true&invt=Abtsgw&project=ggn-nmfs-pamdata-prod-1&prefix=&forceOnObjectsSortingFiltering=false)
 
 ---
 
 ### Data management plan
 
-Draft [Data Management Plan](https://docs.google.com/document/d/1FCwBSUFHXaw8124u0K0YmNmUrCakKbkyKyzvz7sumNM/edit?tab=t.0#heading=h.bphdsu7lbiaf)
+Draft [Data Management Plan](https://docs.google.com/document/d/1FCwBSUFHXaw8124u0K0YmNmUrCakKbkyKyzvz7sumNM/edit?tab=t.0#heading=h.bphdsu7lbiaf) (NOAA only
 
 {{< placeholder >}}
+*Data management diagram will go here*
 
 ### Publically avaliable data sets
 
 NMFS-collected passive acoustic data is archived and publically available via the [NCEI Passive Acoustic Data Viewer](https://www.ncei.noaa.gov/maps/passive-acoustic-data/). 
 
-Select 'NOAA PIFSC' as the Source Organization and 'Glider' as the Platform Type to find our archived datasets
+Select '**NOAA PIFSC**' as the Source Organization and '**Glider**' as the Platform Type to find our archived datasets
 
 ### Interacting with netCDF files
 
 Handy online viewer: [myhdf5](https://myhdf5.hdfgroup.org/)
+
