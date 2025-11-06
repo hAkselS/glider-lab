@@ -3,20 +3,33 @@ title: "WISPR passive acoustic sensor"
 subtitle: "Guidance for installation and operation of a WISPR passive acoustic recorder"
 ---
 
-WISPR stands for Wideband Intelligent Signal Processor and Recorder. It is commercially available from [Embedded Ocean Systems](https://embeddedocean.com/). 
+*DRAFT*
 
-## Useful links
+WISPR stands for Wideband Intelligent Signal Processor and Recorder. It is commercially available from [Embedded Ocean Systems](https://embeddedocean.com/) and has been implemented in a variety of glider types (Seaglider, Slocum, and Oceanscout). 
+
+#### Useful external links
 
 - [WISPR3 GitHub repository](https://github.com/embeddedocean/wispr3)
 - [_**agate**_ MATLAB tools](https://sfregosi.github.io/agate/)
 - [IOP logdev manual](https://iop.apl.washington.edu/iopsg/logdev.txt)
 
 
+#### Table of contents
+
+[WISPR operation](#wispr-operation)  
+[Seaglider installation](#wispr-installation)  
+[Calibration](wispr-calibration.qmd) (separate page)  
+
+
 ## WISPR operation
 
 *These instructions are for the third generation WISPR3 recorder installed on a Seaglider*
 
-### Before a mission
+### Bench testing
+
+*Add info here or links to WISPR3 documentation for recording from a WISPR system on the bench, either installed on a glider or free on the bench.* 
+
+### Program for a mission
 
 WISPR is installed on a Seaglider as a logger device. Configuration for the logger device (when the Seaglider should turn WISPR on and off, etc.) is set using a `wslog.cnf` file. This is typically set up once during installation and not changed. See detailed [installation instructions](#wispr-installation) below. 
 
@@ -80,7 +93,7 @@ $WS_NDIVE,1.0           # ?? psuedo-parameter
 
 ---
 
-## WISPR installation
+## Seaglider installation
 
 ### Hardware installation
 
@@ -151,4 +164,8 @@ On the Seaglider, the WISPR configuration file *must* be called `wslog.cnf` so i
     3.  Confirm it says `WISPR USART2 pwr f6`
     4.  Select `Y` when prompted to re-initialize
 
+## WISPR calibration
+
+
+Own page - [WISPR calibration](wispr-calibration.qmd)
 
