@@ -17,7 +17,8 @@ WISPR stands for Wideband Intelligent Signal Processor and Recorder. It is comme
 #### Table of contents
 
 [WISPR operation](#wispr-operation)  
-[Seaglider installation](#wispr-installation)  
+[Seaglider installation](#seaglider-installation)  
+[WISPR upgrades](#wispr-upgrades)
 [Calibration](wispr-calibration.qmd) (separate page)  
 
 
@@ -31,13 +32,14 @@ WISPR stands for Wideband Intelligent Signal Processor and Recorder. It is comme
 
 ### Program for a mission
 
-WISPR is installed on a Seaglider as a logger device. Configuration for the logger device (when the Seaglider should turn WISPR on and off, etc.) is set using a `wslog.cnf` file. This is typically set up once during installation and not changed. See detailed [installation instructions](#wispr-installation) below. 
+Specific settings for the WISPR system (sampling rate, gain, etc) are set via a `wispr.txt` file stored on the WISPR memory (microSD) or set manually through direct serial communications. These must be set before a mission when the Seaglider is opened up and being refurbished and prepped for the mission. If no `wispr.txt` is present, a default `wispr.txt` file will be created when WISPR powers on. 
 
-Specific settings for the WISPR system itself (sampling rate, gain, etc) are set via a `wispr.txt` file stored on the WISPR memory cards. These must be set before a mission when the Seaglider is opened up and being refurbished and prepped for the mission. 
+Detailed descriptions of each input can be found in the [WISPR3 File Formats Manual](https://github.com/embeddedocean/wispr3/blob/main/Docs/wispr3_file_format.pdf).
 
-The WISPR system's recording settings (sample rate, file duration, gain, etc.) are set using a `wispr.txt` configuration file that is loaded onto the WISPR3 memory (microSD) or set manually through direct serial communications with the WISPR3. If no `wispr.txt` is present, a default file will be created when WISPR3 powers on. Detailed descriptions of each input can be found in the [WISPR3 File Formats Manual](https://github.com/embeddedocean/wispr3/blob/main/Docs/wispr3_file_format.pdf).
+Example files can be found in the [`standard_files`](https://github.com/noaa-pifsc/glider-lab/blob/main/standard_files/) folder of this repository. [wispr.txt_v1.2.250828_200kHz_120sec](https://github.com/noaa-pifsc/glider-lab/blob/main/standard_files/wispr.txt_v1.2.250828_200kHz_120sec) provides an example for a WISPR3 with firmware viresion 1.2.250828 that will sample at 200 kHz with 24-bit resolution and no additional gain and will create 120 sec files. Note the sensor and platform IDs would need to be updated for the specific board and glider. 
 
-A file with the desired settings and the sensor and platform IDs should be loaded onto both microSD cards before a mission; a copy of what was loaded should be saved with the date for reference. Below is an example file that will record 120 second files at a 200 kHz sampling rate and 24-bit resolution with no additional system gain. This example file and others are available in the `standard_files` folder [wispr.txt_v1.2.250828_200kHz_120sec](https://github.com/noaa-pifsc/glider-lab/blob/main/standard_files/wispr.txt_v1.2.250828_200kHz_120sec)
+A copy of the `wispr.txt` file that was lodaed should be saved with the date and glider serial number for reference (*E.g.*, [wispr.txt_v1.2.250828_200kHz_120sec_sg679_loaded_20251117 in SG679's summer 2025 refurb folder](https://drive.google.com/drive/u/0/folders/1Qy8vW8_8bo2QL4RQRdI5xMULWgb6VCEe)).
+
 
 ```
 WISPR 3.0 configuration
@@ -101,11 +103,13 @@ More here later on how to physically install a WISPR3 system on a Seaglider...
 
 This should include information on mounting, cabling, and hydrophone connections.
 
+A shortcut to documents from the OSU Bioacoustics Seaglider Group related to WISPR and WISPR3 hardware installation can be found in the [NMFS PIC Gliders Shared Drive](https://drive.google.com/drive/u/0/folders/1g-9Le4moGOG-IGkVKmtwBpyUlHdioA8F). This includes links to folders of photos of WISPR3 systems installed on SG607 and SG679. 
+
 ### Seaglider logdev configuration
 
-WISPR is controlled by the Seaglider logdev interface meaning it must be added/loaded as a "logger" once it has been installed. A `wslog.cnf` logger configuration file manages how the Seaglider communicates with and controls WISPR as a 'logger' device. This file can contain a variety of commands outlined in detail in the [IOP logdev manual](https://iop.apl.washington.edu/iopsg/logdev.txt). This file is loaded durinng initial WISPR installation and otherwise should not need to be modified unless the WISPR hardware or software is changed.
+WISPR is controlled by the Seaglider logdev interface where it is installed as a logger device. A `wslog.cnf` logger configuration file manages how the Seaglider communicates with and controls WISPR. This file can contain a variety of commands outlined in detail in the [IOP logdev manual](https://iop.apl.washington.edu/iopsg/logdev.txt). This file is loaded during initial WISPR installation and otherwise should not need to be modified unless the WISPR hardware or software is changed.
 
-The exact contents of this file (the amount of pauses and warmups) appears to be sensitive to changes in WISPR3 firmware so thorough testing is required after updating any firmware. Through testing, the below file should operate a *WISPR3 running firmware v1.2.20250828 without a real-time system* (firmware copies can be found in this repo's [resources](https://github.com/noaa-pifsc/glider-lab/tree/main/resources/wispr/firmware) folder). 
+The exact contents of this file (the amount of pauses and warmups) appears to be sensitive to changes in WISPR3 firmware so thorough testing is required after updating any firmware. Through testing, the below file should operate a *WISPR3 running firmware v1.2.20250828 without a real-time system* (historical firmware copies can be found in this repo's [resources](https://github.com/noaa-pifsc/glider-lab/tree/main/resources/wispr/firmware) folder). 
 
 ```
 name=WISPR
@@ -163,6 +167,26 @@ On the Seaglider, the WISPR configuration file *must* be called `wslog.cnf` so i
     2.  Select slot 1
     3.  Confirm it says `WISPR USART2 pwr f6`
     4.  Select `Y` when prompted to re-initialize
+
+--
+
+## WISPR updates
+
+WISPR3 firmware updates must be flashed to the WISPR system. The latest `wispr3.bin` and `wispr3_bl.bin` files are available on the [wispr3 GitHub repo Release folder](https://github.com/embeddedocean/wispr3/tree/main/Release). It has a README with instructions. 
+
+WISPR3s purchased after 2025 come with a bootloader pre-installed. If there is no bootloader on the system, you must first flash the file `wispr3_bl.bin` using atmel ice programmer. You can tell if there is a bootloader on the system at WISPR startup if it displays the following message:
+
+```
+EOS WISPR 3.0 Bootloader v1.0
+Start Application at flash address 0x10000
+```
+
+If a bootloader is present, firmware can be flashed by simply loading the `wispr3.bin` file onto a blank microSD and starting up the system. This will overwrite any existing `wispr.txt` sampling configuration and replace it with a default so after you update the firmware, you should modify the created default with the desired glider and mission specific settings and run a test to make sure they have been implemented. 
+
+Records of firmware versions can be found the [resources/WISPR/firmware](https://github.com/noaa-pifsc/glider-lab/tree/main/resources/WISPR/firmware) folder of this GitHub repository. 
+
+
+--
 
 ## WISPR calibration
 
