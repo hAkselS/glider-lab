@@ -95,4 +95,5 @@ The Seaglider `.nc` file also reports sigma_theta (${\sigma_\theta}$) at a few r
 ### Sound speed
 
 
-Seaglider `.nc` files provides speed of sound in sea water as the `sound_velocity` output (units m/s). This can be calculated from CTD data but there are several possible quations and it is not clear what equation is used to calculate this metric. I suspect it is the Gibbs Seawater Toolbox but need to ask IOP...
+Seaglider `.nc` files provides speed of sound in sea water as the `sound_velocity` output (units m/s). This is also calculated using the the Gibbs-Seawater (GSW) Oceanographic Toolbox, equation `gsw_sound_speed`.
+
