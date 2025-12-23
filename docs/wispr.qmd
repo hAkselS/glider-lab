@@ -18,7 +18,7 @@ WISPR stands for Wideband Intelligent Signal Processor and Recorder. It is comme
 
 [WISPR operation](#wispr-operation)  
 [Seaglider installation](#seaglider-installation)  
-[WISPR upgrades](#wispr-upgrades)
+[WISPR upgrades](#wispr-upgrades)  
 [Calibration](wispr-calibration.qmd) (separate page)  
 
 
@@ -168,7 +168,7 @@ On the Seaglider, the WISPR configuration file *must* be called `wslog.cnf` so i
     3.  Confirm it says `WISPR USART2 pwr f6`
     4.  Select `Y` when prompted to re-initialize
 
---
+---
 
 ## WISPR updates
 
@@ -186,7 +186,7 @@ If a bootloader is present, firmware can be flashed by simply loading the `wispr
 Records of firmware versions can be found the [resources/WISPR/firmware](https://github.com/noaa-pifsc/glider-lab/tree/main/resources/WISPR/firmware) folder of this GitHub repository. 
 
 
---
+---
 
 ## WISPR calibration
 

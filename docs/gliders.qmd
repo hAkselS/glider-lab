@@ -1,0 +1,19 @@
+---
+title: Gliders
+---
+
+We have two Seaglider SGX gliders. These gliders were developed at the University of Washington Applied Physics Laboratory and are currently manufacturered and supported by the [Integrated Observational Platforms (IOP) group at UW-APL](https://iop.apl.washington.edu/seaglider.php). These buoyancy driven, autonomous underwater gliders are capable of diving to 1000 m, survey 15-20 km per day, and can be deployed for many weeks. Each glider is equipped with an RBR Legato CTD and [WISPR passive acoustic monitoring](wispr.qmd) sensor.
+
+## Fleet info and status
+
+[PIFSC Seaglider Inventory Tracker](https://docs.google.com/spreadsheets/d/1dORG6XC6ikm7x13q_PeKNE1b6C-R49zsDDRrlINzBvM/edit?gid=15308096#gid=15308096)
+
+[PIFSC Seaglider Work Record](https://docs.google.com/spreadsheets/d/1YsNtV8qwVBUALXFxBaR8tk-P6ZU2w9QV4eZkyafvf_s/edit?gid=0#gid=0)
+
+### SG273
+
+Name and pics coming soon...
+
+### SG274
+
+Name and pics coming soon...

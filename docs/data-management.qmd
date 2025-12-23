@@ -11,10 +11,10 @@ title: "Data management"
 
 ### Data management plan
 
-Draft [Data Management Plan](https://docs.google.com/document/d/1FCwBSUFHXaw8124u0K0YmNmUrCakKbkyKyzvz7sumNM/edit?tab=t.0#heading=h.bphdsu7lbiaf) (NOAA only
+Draft [Data Management Plan](https://docs.google.com/document/d/1FCwBSUFHXaw8124u0K0YmNmUrCakKbkyKyzvz7sumNM/edit?tab=t.0#heading=h.bphdsu7lbiaf)(NOAA only)
 
-{{< placeholder >}}
-*Data management diagram will go here*
+![Data management overview](img/data_management_overview.png)
+*Overview of different places glider lab data are stored and what types of data and resources should be stored where*
 
 ### Publically avaliable data sets
 

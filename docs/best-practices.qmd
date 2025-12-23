@@ -1,5 +1,5 @@
 ---
-title: Best Practices
+title: Lab values and best practices
 ---
 
 ::: callout-note
@@ -8,16 +8,13 @@ title: Best Practices
 This is a living document which shall always be considered a "draft," as incoming and veteran members of the lab may want to contribute ideas or revisions. This is a place to begin, a place to return to, a place to ground ongoing conversations. Modeled after [SWFSC SAEL Lab Manual Shared values and best pratcies](https://sael-swfsc.github.io/SAEL-lab-manual/content/SharedValues-BestPractices.html).
 :::
 
-
-## **PIFSC Glider Lab Best Practices**
-
 ### **Communication**
 
 <!-- 1.  We hold lab meetings regularly in which all members are expected to attend if their schedule allows. During these meetings all members are expected to contribute by sharing progress reports, discussing challenges, and celebrating successes. -->
 
-2.  We use the PIFSC Gliders Google Space and Google Meet for informal discussions between lab members and project teams. To be added to the Google Space please contact Selene Fregosi [selene.fregosi@noaa.gov](selene.fregosi@noaa.gov)
+1.  We use the PIFSC Gliders Google Space and Google Meet for informal discussions between lab members and project teams. To be added to the Google Space please contact Selene Fregosi [selene.fregosi@noaa.gov](selene.fregosi@noaa.gov)
 
-3.  We use GitHub projects to keep track of tasks and projects. All lab members are expected to check & respond to email, chats, and GitHub Projects regularly.
+2.  We use GitHub projects to keep track of tasks and projects. All lab members are expected to check & respond to email, chats, and GitHub Projects regularly.
 
 ### **Safety**
 
@@ -37,4 +34,4 @@ This is a living document which shall always be considered a "draft," as incomin
 
 ### **Website Development**
 
-As described above, this website is intended to be a place glider team members can both use as a reference and contribute to. The website is built using Quarto, which uses text file `.qmd` files and markdown syntax to build content. `.qmd` files can be edited in any text editor, RStudio, or VSCode. For help contributing to this website, Use the 'Report an issue' link on the top left of this page to create a GitHub Issue and request assistance.
+As described above, this website is intended to serve as a central resource for glider team members where all can contribute. The website is built using Quarto, which uses text file `.qmd` files and markdown syntax to build content. `.qmd` files can be edited in any text editor, RStudio, or VSCode. For help contributing to this website, Use the 'Report an issue' link on the top left of this page to create a GitHub Issue and request assistance.

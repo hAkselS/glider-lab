@@ -39,12 +39,16 @@ website:
         text: Home
       - href: missions.qmd
         text: Missions
-      - href: best-practices.qmd
-        text: Best practices
+      - section: Best practices
         contents:
-        - mission-prep.qmd
-        - data-processing.qmd
-        - data-management.qmd
+        - href: best-practices.qmd
+          text: Lab values & best practices
+        - href: mission-prep.qmd
+          text: Mission preparation
+        - href: data-management.qmd
+          text: Data management
+        - href: data-processing.qmd
+          text: Data processing
       - section: Piloting
         contents:
         - href: team-resources.qmd
@@ -61,6 +65,8 @@ website:
       #       text: Gliders
       #     - href: dataproc-acoustics.qmd
       #       text: Acoustics
+      - href: gliders.qmd
+        text: Gliders
       - section: Sensors
         contents:
         - href: wispr.qmd
