@@ -3,25 +3,26 @@ title: "Mission preparation"
 subtitle: Protocols/resources for preparing a glider for a mission
 ---
 
-*This page is under construction and feedback is very welcome!*
+*This page is under construction and feedback is very welcome! Hit "Report an issue" on the right to provide suggestions.*
 
-- [Mission Prep Task List - TEMPLATE](https://docs.google.com/document/d/1TMXsop5GJW_rMxrP8zSuazALNi_j8nHq24RIIzfw7_A/edit?tab=t.0#heading=h.7xtkyk82v1ni)
+Clickable/editable Google Doc version - [Mission Prep Task List - TEMPLATE](https://docs.google.com/document/d/1TMXsop5GJW_rMxrP8zSuazALNi_j8nHq24RIIzfw7_A/edit?tab=t.0#heading=h.7xtkyk82v1ni). Suggest making a copy of this template for each glider/mission to track tasks and take notes. 
 
-**Main categories of prep steps:**
-
-*(this page currently covers the items with a check)*
+**Main categories of prep steps:**  
+    *\*(this page currently covers the items with a check)*
 
 - [Hardware checks](#hardware-checks)
   - ballasting
   - &#x2713; updating mass in `sg_calib_constants.m` 
   - work record updates
 - [Mission planning](#mission-planning)
-  - set up folders for data management
+  - &#x2713; Set up Shared Drive folders
+  - &#x2713; Set up local folders
   - track/endurance planning
   - shipping
 - [Basestation prep](#prepare-basestation)
-  - &#x2713; Update constants (`missions.yml`, `sg_calib_constants.m`, `sg_plot_constants.m`)
+  - &#x2713; Update constants (`sg_calib_constants.m`, `sg_plot_constants.m`)
   - &#x2713; Initiate new mission
+  - &#x2713; Add mission to `mission.yml`
   - Check/prep piloting files
 - Launch day prep
   - Self test review
@@ -29,7 +30,7 @@ subtitle: Protocols/resources for preparing a glider for a mission
   - Final file checks
 - ??
 
-*(this page currently covers the items with a check)*
+---
 
 # Hardware checks
 
@@ -51,6 +52,8 @@ If shipping:
 <sub>[Back to top](#)</sub>
 
 # Mission planning
+
+## Logistics
 - [ ] Draft survey plans
 - [ ] Make final track (generate map and summary info, generate targets vfile, generate CSV of planned survey at 5 km resolution for Navy)
 - [ ] Draft deployment plan/float plan
@@ -132,9 +135,9 @@ If you'll be processing files mid-mission with __*agate*__ it's helpful to set u
 
 These two files exist/have copies in the glider's home folder and the latest version will be copied to the mission folder when it is created below, so update them in the home directory first. 
 
-### Check the mission title in `sg_calib_constants.m`
+### Update the mission title in `sg_calib_constants.m`
 
-Check, and if neededed, update the mission title in `sg_calib_constants.m` and check that mass is valid from most recent work records. 
+Check, and if needed, update the mission title in `sg_calib_constants.m` and check that mass is valid from most recent work records. 
 
 See [Update `sg_calib_constants.m`](#update-sg_calib_constants.m) section above for more detail
 
