@@ -11,8 +11,8 @@ Clickable/editable Google Doc version - [Mission Prep Task List - TEMPLATE](http
     *\*(this page currently covers the items with a check)*
 
 - [Hardware checks](#hardware-checks)
-  - ballasting
-  - &#x2713; updating mass in `sg_calib_constants.m` 
+  - &#x2713; Ballast or tank test
+  - &#x2713; Update mass in `sg_calib_constants.m` 
   - work record updates
 - [Mission planning](#mission-planning)
   - &#x2713; Set up Shared Drive folders
@@ -35,7 +35,14 @@ Clickable/editable Google Doc version - [Mission Prep Task List - TEMPLATE](http
 # Hardware checks
 
 - [ ] Complete refurbishment and bench tests of any new sensors (tracked in [work records](https://drive.google.com/drive/u/0/folders/1Jcx4QQY_ujkqmqNBxfgTCHX-VeUrRU9r))
-- [ ] Complete tank ballasting procedure to get approximate centers and check buoyancy - [PIFSC Ballasting Procedure - DRAFT](https://docs.google.com/document/d/1b6X5l-R-8e2ALiu8q5KYue_S4rOvQ0H3Nii5-_5S7o0/edit?tab=t.0)
+
+### Ballast or tank test 
+
+After a refurbishment or any new sensors have been installed, ballast (if major mass/volume changes) or tank test (if minor changes) to get preliminary/approximate trim centers and check glider buoyancy for the planned mission conditions. 
+
+See [Tank Ballasting Procedure](https://docs.google.com/document/d/1Sx_tv-fnL69xdCXWQwYgJ5MQdmun7sLenrywtFPlwvY/edit?tab=t.0#heading=h.2m0cz7fh78at) for a detailed guide of the operational steps (main menu guidance, etc.) to check centers and buoyancy in a tank.
+
+- [ ] Use [Tank test and Ballast Calculations](https://docs.google.com/document/d/1b6X5l-R-8e2ALiu8q5KYue_S4rOvQ0H3Nii5-_5S7o0/edit?usp=drive_link) to run some calculations on the values collected with the above procedure to confirm that the observed buoyancy and trim centers are appropriate for the planned mission.
 
 ### Update `sg_calib_constants.m`
 - [ ] Update `sg_calib_constants.m` on basestation with any mass or calibration changes from refurbishment or repairs and new mission title
@@ -43,7 +50,7 @@ Clickable/editable Google Doc version - [Mission Prep Task List - TEMPLATE](http
    - Before editing, first confirm the existing `sg_calib_constants.m` is backed up as a copy with the date modified in the name (e.g., `sg_calib_constants_2025-08-28.m`). If a copy does not exist, make one
    - Then, modify the primary `sg_calib_constants.m` with any needed changes. Note these changes as comments and update the "Last updated" line. Make a copy with the date
 
-If shipping:  
+### If shipping...  
 
 - [ ] Complete and review a pre-shipment self test (either run this with the refurbishment mission or with the upcoming mission set on the basestation)
 - [ ] Review final packing list and pack crates
