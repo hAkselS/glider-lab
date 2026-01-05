@@ -26,6 +26,8 @@ For current Seaglider fleet status, see [this Google Sheet](https://docs.google.
 
 [NMFS PIC Gliders Google Shared Drive](https://drive.google.com/drive/folders/0ADBCQZl7LcMGUk9PVA)(NOAA-only)
 
+[nmfs.pic.gliders email group](https://docs.google.com/document/d/1ZiZGCoczyC9KMqDtPGBvmzCa3XRf_OWzKPr-40zd-vk/edit?tab=t.0)
+
 <!-- The PIFSC glider team is using GitHub Issues and Projects for project management. Our efforts are heavily inspired and influenced by the Openscapes [GitHub for project management](https://openscapes.github.io/series/core-lessons/github/github-issues.html){target="_blank"} approach. -->
 
 <!-- The [PIFSC glider team project](https://github.com/orgs/noaa-pifsc/projects/){target="_blank"} pulls from issues from several repositories, but in particular [this repo](https://github.com/noaa-pifsc/glider-lab). For more details see the [best practices](content/best-practices.qmd) page. -->
