@@ -43,12 +43,30 @@ After a refurbishment or any new sensors have been installed, ballast (if major 
 See [Tank Ballasting Procedure](https://docs.google.com/document/d/1Sx_tv-fnL69xdCXWQwYgJ5MQdmun7sLenrywtFPlwvY/edit?tab=t.0#heading=h.2m0cz7fh78at) for a detailed guide of the operational steps (main menu guidance, etc.) to check centers and buoyancy in a tank.
 
 - [ ] Use [Tank test and Ballast Calculations](https://docs.google.com/document/d/1b6X5l-R-8e2ALiu8q5KYue_S4rOvQ0H3Nii5-_5S7o0/edit?usp=drive_link) to run some calculations on the values collected with the above procedure to confirm that the observed buoyancy and trim centers are appropriate for the planned mission.
+- [ ] Update [Work Record](https://docs.google.com/spreadsheets/d/1YsNtV8qwVBUALXFxBaR8tk-P6ZU2w9QV4eZkyafvf_s/edit?gid=0#gid=0) with relevant info
+- [ ] Update [Inventory Tracker](https://docs.google.com/spreadsheets/d/1dORG6XC6ikm7x13q_PeKNE1b6C-R49zsDDRrlINzBvM/edit?gid=15308096#gid=15308096) if any major sensor changes were made
 
-### Update `sg_calib_constants.m`
-- [ ] Update `sg_calib_constants.m` on basestation with any mass or calibration changes from refurbishment or repairs and new mission title
-   - `sg_calib_constants.m` is located in each gliders home folder (`/gliderjail/home/sgXXX` ). This will be copied to the mission folder when it is created with `newMission.py` below 
-   - Before editing, first confirm the existing `sg_calib_constants.m` is backed up as a copy with the date modified in the name (e.g., `sg_calib_constants_2025-08-28.m`). If a copy does not exist, make one
-   - Then, modify the primary `sg_calib_constants.m` with any needed changes. Note these changes as comments and update the "Last updated" line. Make a copy with the date
+### Update checkout sheet
+
+::: {.callout-important}
+The checkout sheet is the guide to each glider build and contains all the details needed to set up a glider mission so it's critical to keep it updated!
+:::
+
+A new checkout sheet is needed following any work - refurbishments, repairs, sensor installations, or ballasting - with the new mass and any other relevant info such as sensor serial numbers or calibration dates
+
+- [ ] Create a new checkout sheet
+  - Make a copy of the existing doc and rename with today's date
+  - Update the relevant fields with the correct value, any important notes, and the date it was updated
+
+Check sheets are stored in the glider-specific folders in the [NMFS PIC Gliders Shared Drive](https://drive.google.com/drive/u/0/folders/0ADBCQZl7LcMGUk9PVA). 
+
+```default
+NMFS PIC Gliders
+├── SG273
+└── SG274
+  ├── sg274 checkout sheet YYYY-MM-DD.xlsx
+  └── sg274 checkout sheet YYYY-MM-DD.xlsx
+```
 
 ### If shipping...  
 
@@ -74,14 +92,14 @@ Set up folder structure for this mission following the [PIFSC Glider Data Manage
 
 ### Create a mission folder on Google Drive
 
-In the [NMFS PIC Gliders Shared Drive](https://drive.google.com/drive/u/0/folders/0ADBCQZl7LcMGUk9PVA), navigate to the 'missions' folder and create a new folder named with the glider and mission title. Follow the below structure to create the relevant folders and documents. Template files for a pilot log, pilot schedule, and mission report are available in the main 'missions' folder. 
+In the [NMFS PIC Gliders Shared Drive](https://drive.google.com/drive/u/0/folders/0ADBCQZl7LcMGUk9PVA), navigate to the 'missions' folder and create a new folder named with the mission title. Follow the below structure to create the relevant folders and documents. Template files for a pilot log, pilot schedule, and mission report are available in the main 'missions' folder. 
 
 This folder structure is still underdevelopment (we have to see how some projects and missions go to assess what is working or not working!) so the organization at the start of a mission is not critical or set in stone. However, we do want all relevant parts to be created and stored generally together before the mission begins. 
 
-For example, if more than one glider is being flown for a single project, and thus a single pilot schedule exists, it can just live in the main 'missions' folder and shortcuts can be added to the glider-specific folder. Alternatively, it may make sense to create a 'project' folder (e.g., WHICEAS) within the 'missions' folder and have each glider within that project folder. 
+For example, we are still working out how to organize things when more than one glider is flown for a project - each glider has it's own organizational string (e.g., `sgxxx_YYYYMMDD_location`, pilot log, and configuration files) but that project would likely have a single pilot schedule and report.
 
-```
-sgXXX_YYYYMMDD_location/project
+```default
+YYYYMMDD_location/project
 │   mission report
 ├── photos
 │   pilot log
@@ -137,28 +155,15 @@ If you'll be processing files mid-mission with __*agate*__ it's helpful to set u
 **NOTE:** I think this script **does not** move wispr files (`ws0001az.x00`, etc) and so those must be moved manually
 :::
 
-
-## Update "constants" files
-
-These two files exist/have copies in the glider's home folder and the latest version will be copied to the mission folder when it is created below, so update them in the home directory first. 
-
-### Update the mission title in `sg_calib_constants.m`
-
-Check, and if needed, update the mission title in `sg_calib_constants.m` and check that mass is valid from most recent work records. 
-
-See [Update `sg_calib_constants.m`](#update-sg_calib_constants.m) section above for more detail
-
-### Update coordinates in `sg_plot_constants.m`
-
-`sg_plot_constants.m` sets the latitude and longitude bounds/extent for the map in the mission tile on seaglider.pub. The home directory may have some examples for common locations (e.g., Shilshole) that can be copied or new coordinates can be entered. 
-
 ## Create the new mission directory
 
 - Navigate to the glider’s home directory *e.g.*, `/home/jails/noaaosu/gliderjail/home/sgXXX`
 - Use `NewMission.py` to create a new folder for this specific mission
    - The function will set up the mapping of the `current` folder so all newly created piloting files will be saved here when the glider calls in
-   - It will also copy general files from the home directory like `pagers.yml`, all the files that start with `.` that we don’t really use except `.pagers`, and piloting files like `science`, `cmdfile`, `targets`, `sg_calib_constants.m`, and `sg_plot_constants.m`. The originals stay in the home directory but this provides a starting point for this particular mission
-- To run the function use: 
+   - It will copy or make shortcuts to required piloting files like `pagers.yml`, `cmdfile`, `sg_calib_constants.m`, and `sg_plot_constants.m`. 
+- Run the function with the below code
+  - `<newMissionFolderName>` is the folder name that matches the mission title string set in `sg_calib_constants.m` and follows the format of `YYYYMMDD_location/project` where location/project is something like `Oahu` or `WHICEAS`
+      - Example: `20251202_tests_wispr`
 
 ```default
 basepy NewMission.py ./ <newMissionFolderName>
@@ -167,10 +172,16 @@ basepy NewMission.py ./ <newMissionFolderName>
 # alternatively could use full paths
 /opt/basestation/bin/python /usr/local/basestation3/NewMission.py ./ <newMissionFolderName>
 ``` 
-
-   - `<newMissionFolderName>` is the folder name that should match the mission title string from `sg_calib_constants.m` that follows the format of `YYYYMMDD_location/project` where location/project is something like `Oahu` or `WHICEAS`
-      - Example: `20251202_tests_wispr`
 - Check that it was set up properly by running `ls -la` from the home directory
+
+::: {.callout-caution collapse="true"}
+
+##### What files get copied from where??
+- `sg_calib_constants.m`,  `sg_plot_constants.m`, `sections.yml`, `cmdfile`, `targets`, `science`, `scicon.sh` get copied from previous mission (if it exists) or the home directory. These will need further checking/updating (below)
+- It will create a shortcut to `pagers.yml` and other dot configuration files (in the glider's home diretory)
+- It will create a blank database file `sgxxx.db`
+:::
+
 
 ## Add the mission to `missions.yml`
 
@@ -197,6 +208,35 @@ Example syntax *(note the below examples use the OSU naming scheme)*
 # condensed
   - { glider: 273, mission: 20251202_tests_wispr, path: sg273/20251202_tests_wispr, status: complete}
 ```
+
+- If anything isn't working, start over from the original by copying it over from your user directory:
+```default
+# from the home directory
+cp ../../username/missions.orig missions.yml
+
+# from your user directory
+cp missions.orig ../gliderjail/home/missions.yml
+```
+
+## Update "constants" files
+
+These two files exist/have copies in the glider's home folder and the latest version will be copied to the mission folder when it is created below, so update them in the home directory first. 
+
+### Update `sg_calib_constants.m`
+
+- [ ] Update mission title, and any mass or calibration changes from refurbishment or repairs
+   - Modify the copy of `sg_calib_constants.m` in the current (newly created) mission folder
+   - Update the "Last updated" line at the top with today's date and your initials
+   - For record keeping, make a copy in the glider's home folder (`/gliderjail/home/sgXXX` ) but rename to include the date modified (e.g., `sg_calib_constants_2025-08-28.m`)
+   ```default
+   # from the glider's current folder
+   cp sg_calib_constants.m ../sg_calib_constants_YYYY-MM-DD.m
+   ```
+### Update `sg_plot_constants.m`
+
+- [ ] Update latitude/longitude bounds for the map shown on the mission tile on seaglider.pub
+  - The home directory may have some examples for common locations (e.g., Shilshole) that can be copied or new coordinates can be entered
+
 
 <sub>[Back to top](#)</sub>
 
