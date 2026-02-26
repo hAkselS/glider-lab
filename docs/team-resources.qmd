@@ -3,10 +3,12 @@ title: "Team Resources"
 Subtitle: Links to various resources that don't belong elsewhere
 ---
 
-
+## Useful guides
 
 
 - [Command Line Guide](https://docs.google.com/document/d/1Kb-Txhg0VRp1Su7b27i2SznoJHQzJHwh0H2XGFuCZoE/edit?tab=t.0#heading=h.jjpt2jqebw3e): A Google Doc cheat sheet for some command line basics useful for navigating around the Seaglider basestation 
+
+- [Connecting to seaglider.pub](https://docs.google.com/document/d/1XnCY5PqrNtsyxczDpUQLUCBME3ei8-OcIjT843ZoAEk/edit?tab=t.0): A Google Doc guide for different ways to connect to seaglider.pub including using Powershell, TeraTerm, or WinSCP.
 
 {{< placeholder >}}
 
